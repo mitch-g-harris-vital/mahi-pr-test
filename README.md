@@ -6,3 +6,7 @@ Test repository for Mahi PR workflow validation.
 
 Exercises end-to-end PR lifecycle: branch, commit, push, review, merge.
 
+## Usage
+
+Used as fixture for automated PR workflow testing. No runtime code.
+
