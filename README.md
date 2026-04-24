@@ -18,3 +18,7 @@ Repository intentionally minimal — only documentation files, no source or buil
 
 Active fixture. Updated as workflow scenarios expand.
 
+## Notes
+
+Changes here drive PR workflow exercises; no functional impact.
+
