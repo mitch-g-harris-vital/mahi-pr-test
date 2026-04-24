@@ -14,3 +14,7 @@ Used as fixture for automated PR workflow testing. No runtime code.
 
 Repository intentionally minimal — only documentation files, no source or build config.
 
+## Status
+
+Active fixture. Updated as workflow scenarios expand.
+
