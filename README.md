@@ -1,24 +1,34 @@
 # mahi-pr-test
 
-Test repository for Mahi PR workflow validation.
+Sandbox project for verifying Mahi's `.mahi/` per-project config layer.
 
-## Purpose
+## What's here
 
-Exercises end-to-end PR lifecycle: branch, commit, push, review, merge.
+```
+.mahi/
+  .gitignore           # node_modules/, package.json, lockfiles
+  hooks/
+    project-banner.js  # always-on UserPromptSubmit banner. Hot-reload check.
+    pr-keyword.js      # only fires when the prompt mentions "PR".
+  tools/
+    project_echo.js        # MCP tool, scoped to this project only.
+    linear_self_check.js   # exercises @linear/sdk via NODE_PATH resolution.
+```
 
-## Usage
+## How to test (after Mahi is rebuilt with the .mahi/ feature)
 
-Used as fixture for automated PR workflow testing. No runtime code.
+1. **Open this project in Mahi.** Add it via the Project Sidebar if not present (path: this directory).
+2. **Spawn any session** in this project.
+3. **Send a prompt.** Both project hooks should run on `UserPromptSubmit`:
+   - `project-banner` injects context tagged with this project's name + id + path.
+   - `pr-keyword` only injects when the prompt contains "PR".
+   The agent's reply should reflect the injected context (e.g. it acknowledges the project name).
+4. **List MCP tools.** Ask the agent: "list your MCP tools". `project_echo` and `linear_self_check` must appear; in any *other* project they must not.
+5. **Hot reload.** Edit `project-banner.js` and change the message. Send another prompt — the new text appears without restarting Mahi.
+6. **Negative control.** Spawn a session in a different project; confirm none of these hooks/tools surface there.
 
-## Scope
+## Useful debug surfaces
 
-Repository intentionally minimal — only documentation files, no source or build config.
-
-## Status
-
-Active fixture. Updated as workflow scenarios expand.
-
-## Notes
-
-Changes here drive PR workflow exercises; no functional impact.
-
+- Sidecar log (dev): the terminal running `pnpm tauri dev`. Look for `[project-loader]` warnings on bad files.
+- Sidecar log (prod): `~/.local/share/mahi/logs/sidecar.log`.
+- `process.env.MAHI_PROJECT_ID` is set on the spawned shell; surfaced in hook payload `env`.
