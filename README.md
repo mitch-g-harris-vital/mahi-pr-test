@@ -33,3 +33,9 @@ Sandbox project for verifying Mahi's `.mahi/` per-project config layer.
 - Sidecar log (prod): `~/.local/share/mahi/logs/sidecar.log`.
 - `process.env.MAHI_PROJECT_ID` is set on the spawned shell; surfaced in hook payload `env`.
 - `process.env.MAHI_SESSION_ID` is set on the spawned shell; identifies the active session.
+
+## Troubleshooting
+
+- Hooks not firing? Confirm `MAHI_PROJECT_ID` is set in the spawned shell — its absence usually means the project context didn't attach.
+- MCP tools missing from `list your MCP tools`? Re-check the sidecar log for `[project-loader]` warnings; a malformed file in `.mahi/tools/` skips the whole batch.
+- Hot-reload silent? Save the file again — some editors write to a temp path first and the watcher may miss the rename.
