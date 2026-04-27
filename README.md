@@ -42,3 +42,4 @@ Sandbox project for verifying Mahi's `.mahi/` per-project config layer.
 - Banner missing? Check `.mahi/hooks/project-banner.js` is executable and emits valid JSON on stdout.
 - Tool not appearing? Confirm the file in `.mahi/tools/` exports a default function and exits 0 on `--help`.
 - Stale config after pull? Restart the session — project context is captured at spawn time, not re-read on every prompt.
+- `project_echo` returns nothing? Verify the spawned shell inherits `MAHI_PROJECT_ID`; the tool short-circuits when it's unset.
