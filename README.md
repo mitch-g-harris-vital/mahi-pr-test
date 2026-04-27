@@ -32,3 +32,4 @@ Sandbox project for verifying Mahi's `.mahi/` per-project config layer.
 - Sidecar log (dev): the terminal running `pnpm tauri dev`. Look for `[project-loader]` warnings on bad files.
 - Sidecar log (prod): `~/.local/share/mahi/logs/sidecar.log`.
 - `process.env.MAHI_PROJECT_ID` is set on the spawned shell; surfaced in hook payload `env`.
+- `process.env.MAHI_SESSION_ID` is set on the spawned shell; identifies the active session.
